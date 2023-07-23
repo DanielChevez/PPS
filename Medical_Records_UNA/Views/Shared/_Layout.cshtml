@@ -1,0 +1,169 @@
+﻿@using Medical_Records_UNA.Extensions;
+@{
+    List<int> Actions = Context.Session.GetObject<List<int>>("ActionsOfUser");
+}
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Rehabilitación UNA</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Medical_Records_UNA.styles.css" asp-append-version="true" />
+
+    <link rel="stylesheet" href="~/css/menu.css" asp-append-version="true" />
+
+    <script src="https://kit.fontawesome.com/69e39bfeb4.js" crossorigin="anonymous"></script>
+
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+
+    <div class="wrapper row">
+        <div class="sidebar col-1">
+            <div class="logo_details">
+                <a asp-area="" asp-controller="Home" asp-action="Index">
+                    <img class="logo_name" src="~/img/logo2.png" />
+                </a>
+
+                <div class="logo_name"></div>
+                <i class="bx bx-menu" id="btn"></i>
+            </div>
+            <ul class="nav-list">
+                <li>
+                    <i class="bx bx-search"></i>
+                    <input type="text" placeholder="Search...">
+                    <span class="tooltip">Search</span>
+                </li>
+
+                <li>
+
+                    <a class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#Expedientes"
+                       aria-expanded="false" aria-controls="pages">
+                        <i class="fa-regular fa-folder-open"></i>
+                        <span class="link_name">Expedientes<i style="padding-left:40px;" class=" fa-solid fa-caret-down"></i> </span>
+                        <span class="tooltip">Expedientes</span>
+                    </a>
+                    <ul id="Expedientes" class="submenu sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                        <li class="item_submenu sidebar-item ">
+                            <div>
+                                <a class="sidebar-link"> <i class="fa-solid fa-book-medical"></i> Información</a>
+                            </div>
+                        </li>
+
+                        <li class="item_submenu sidebar-item">
+
+                            <a href="#" class="sidebar-link">
+                                <i class="fa-solid fa-heart-pulse"></i>Cardiovasculares
+                            </a>
+                        </li>
+                        <li class="item_submenu sidebar-item">
+
+                            <a href="#" class="sidebar-link">
+                                <i class="fa-solid fa-brain"></i>Cerebrovasculares
+                            </a>
+                        </li>
+                        <li class="item_submenu sidebar-item">
+                            <a href="#" class="sidebar-link"> <i class="fa-solid fa-stethoscope"></i> Signos Vitales</a>
+                        </li>
+                        <li class="item_submenu sidebar-item">
+
+                            <a href="#" class="sidebar-link"><i class="fa-solid fa-pills"></i>Medicamentos</a>
+                        </li>
+                    </ul>
+
+                </li>
+                @if (Actions.Contains(2))
+                {
+                    <li>
+                        <a href="#">
+                            <i class="fa-solid fa-user-injured"></i>
+                            <span class="link_name">Pacientes</span>
+                        </a>
+                        <span class="tooltip">Pacientes</span>
+                    </li>
+                }
+
+                <li>
+                    <a asp-area="" asp-controller="Users" asp-action="Index">
+                        <i class="bx bx-dumbbell"></i>
+                        <span class="link_name">Usuario prueba</span>
+                    </a>
+                    <span class="tooltip">Usuarios</span>
+                </li>
+
+                <li class="sidebar-item ">
+
+                    <a class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#usuario"
+                       aria-expanded="false" aria-controls="pages">
+                        <i class="fa-solid fa-user-doctor"></i>
+                        <span class="link_name">Usuario<i style="padding-left:40px;" class=" fa-solid fa-caret-down"></i> </span>
+                        <span class="tooltip">Usuario</span>
+                    </a>
+                    <ul id="usuario" class="submenu sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                        <li class="item_submenu sidebar-item ">
+                            <div>
+                                <a class="sidebar-link"> <i class="fa-solid fa-book-medical"></i> Agregar</a>
+                            </div>
+                        </li>
+                        <li class="item_submenu sidebar-item">
+
+                            <a href="#" class="sidebar-link">
+                                <i class="bx bx-dumbbell"></i>Visualizar
+                            </a>
+                        </li>
+                        <li class="item_submenu sidebar-item">
+                            <a href="#" class="sidebar-link"> <i class="fa-solid fa-stethoscope"></i> Modificar</a>
+                        </li>
+                        <li class="item_submenu sidebar-item">
+
+                            <a href="#" class="sidebar-link"><i class="fa-solid fa-tablets"></i>Eliminar</a>
+                        </li>
+                    </ul>
+
+                </li>
+
+
+                <li class="profile">
+                    <div class="profile_details">
+                        <img src="/img/Logo.png" alt="profile image">
+                        <div class="profile_content">
+                            <div class="name">Anna Jhon</div>
+                            <div class="designation">Admin</div>
+                        </div>
+                    </div>
+                    <a id="log_out" asp-area="" asp-controller="Home" asp-action="LogOut"> <i class="bx bx-log-out"> </i> </a>
+
+
+
+                </li>
+            </ul>
+        </div>
+        <div class="col">
+
+            <div>
+                <div>
+                    <main role="main" class="pb-3" id="renderBody">
+                        @RenderBody()
+                    </main>
+                </div>
+
+            </div>
+        </div>
+        <footer class="border-top footer justify-content-center">
+            <div style=" padding-left:100px;">
+                &copy; 2023 - Medical_Records_UNA - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            </div>
+        </footer>
+    </div>
+    
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/Menu.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
